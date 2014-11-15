@@ -74,6 +74,19 @@ public class MainActivity extends Activity
 	}
 
 	@Override
+	public void onBackPressed()
+	{
+		switch (status)
+		{
+		case Advanced:
+			setStatus(Status.Simple);
+			break;
+		default:
+			super.onBackPressed();
+		}
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		MenuInflater inflater = getMenuInflater();
@@ -96,11 +109,12 @@ public class MainActivity extends Activity
 		case R.id.share:
 			if (status == Status.NoHtc)
 			{
-				AlertDialog.Builder ad = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT)
-				.setMessage("No info to share.");
-				
+				AlertDialog.Builder ad = new AlertDialog.Builder(this,
+						AlertDialog.THEME_HOLO_LIGHT)
+						.setMessage("No info to share.");
+
 				ad.show();
-				
+
 				return true;
 			}
 			Intent sendIntent = new Intent();
@@ -195,6 +209,7 @@ public class MainActivity extends Activity
 		dic.put("HTC__G09", "HTC-Sweden");
 		dic.put("HTC__M27", "HTC-Turkey");
 		dic.put("HTC__001", "HTC-WWE");
+		dic.put("HTC__039", "HTC-Australia");
 		dic.put("HUTCH001", "Hutch-Australia");
 		dic.put("O2___102", "O2-DE");
 		dic.put("O2___001", "O2-UK");
@@ -276,7 +291,7 @@ public class MainActivity extends Activity
 
 	public void onClick(View v)
 	{
-		assignStatusAll();
+		setStatus(Status.Advanced);
 	}
 
 	public void setStatus(Status status)
