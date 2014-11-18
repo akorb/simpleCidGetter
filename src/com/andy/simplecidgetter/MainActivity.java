@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -50,6 +49,7 @@ public class MainActivity extends Activity
 
 		try
 		{
+			cid = getCid();
 			all = getProperties();
 		}
 		catch (IOException e)
@@ -145,22 +145,42 @@ public class MainActivity extends Activity
 		{
 			String s1 = reader.nextLine();
 
-			if (s1.contains("ro.cid"))
-			{
-				sb.insert(0, s1 + seperator);
-				cid = s1.replaceFirst(Pattern.quote("[ro.cid]: ["), "")
-						.replace(']', '\0').trim();
-			}
-			else
-			{
-				sb.append(s1);
-				sb.append(seperator);
-			}
+			sb.append(s1);
+			sb.append(seperator);
 		}
 
 		reader.close();
 
 		return sb.toString();
+	}
+
+	private String getCid() throws IOException
+	{
+		Scanner primary = new Scanner(Runtime.getRuntime()
+				.exec("getprop ro.cid").getInputStream());
+
+		while (primary.hasNext())
+		{
+			String s1 = primary.nextLine();
+			primary.close();
+
+			if (s1 != "")
+				return s1;
+		}
+
+		Scanner fallback = new Scanner(Runtime.getRuntime()
+				.exec("getprop ro.boot.cid").getInputStream());
+
+		while (fallback.hasNext())
+		{
+			String cid = fallback.nextLine();
+			fallback.close();
+
+			if (cid != "")
+				return cid;
+		}
+
+		return "";
 	}
 
 	private void fillHashMap()
@@ -179,7 +199,7 @@ public class MainActivity extends Activity
 		dic.put("DOPOD701", "DOPOD");
 		dic.put("T-MOB009", "Era");
 		dic.put("FASTW401", "Fastweb-IT");
-		dic.put("GOOGL001", "GOOGLE");
+		dic.put("GOOGL001", "GOOGLE (GPE)");
 		dic.put("H3G__F05", "H3G-DAN");
 		dic.put("H3G__402", "H3G-Italy");
 		dic.put("H3G__003", "H3G-ROI");
@@ -263,6 +283,8 @@ public class MainActivity extends Activity
 		dic.put("VODAP015", "VODA-Swisscom-WWE");
 		dic.put("VODAPM27", "VODA-TR");
 		dic.put("VODAP001", "VODA-UK");
+		dic.put("BS_US001", "Developer");
+		dic.put("BS_US002 ", "Edition");
 	}
 
 	private void assignStatusSimple()
