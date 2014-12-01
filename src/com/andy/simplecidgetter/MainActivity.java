@@ -1,9 +1,7 @@
 package com.andy.simplecidgetter;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,8 +11,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class MainActivity extends Activity
@@ -22,18 +18,12 @@ public class MainActivity extends Activity
 	Map<String, String> dic = new HashMap<String, String>();
 
 	TextView tvCid;
-	TextView tvAll;
 	TextView tvCidName;
-
-	LinearLayout ll;
-
-	ScrollView svAll;
 
 	String cid = "";
 	String cidName = "";
-	String all = "";
 
-	Status status = Status.Simple;
+	Status status = Status.OfficialCid;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -42,47 +32,24 @@ public class MainActivity extends Activity
 		setContentView(R.layout.activity_main);
 
 		tvCid = (TextView)findViewById(R.id.tvCid);
-		tvAll = (TextView)findViewById(R.id.tvAll);
 		tvCidName = (TextView)findViewById(R.id.tvCidName);
-		svAll = (ScrollView)findViewById(R.id.svAll);
-		ll = (LinearLayout)findViewById(R.id.MainContainer);
 
-		try
-		{
-			cid = getCid();
-			all = getProperties();
-		}
-		catch (IOException e)
-		{
-
-		}
-
+		cid = PropertyHelper.getCid();
 		tvCid.setText(cid);
-		tvAll.setText(all);
 
 		fillHashMap();
 
-		if (dic.containsKey(cid))
+		if (cid == "")
 		{
-			cidName = dic.get(cid);
-			tvCidName.setText(cidName);
+			setStatus(Status.NoHtc);
+		}
+		else if (dic.containsKey(cid))
+		{
+			setStatus(Status.OfficialCid);
 		}
 		else
 		{
-			setStatus(Status.Simple);
-		}
-	}
-
-	@Override
-	public void onBackPressed()
-	{
-		switch (status)
-		{
-		case Advanced:
-			setStatus(Status.Simple);
-			break;
-		default:
-			super.onBackPressed();
+			setStatus(Status.UnofficialCid);
 		}
 	}
 
@@ -100,12 +67,6 @@ public class MainActivity extends Activity
 		// Handle item selection
 		switch (item.getItemId())
 		{
-		case R.id.simple:
-			setStatus(Status.Simple);
-			return true;
-		case R.id.advanced:
-			setStatus(Status.Advanced);
-			return true;
 		case R.id.share:
 			if (status == Status.NoHtc)
 			{
@@ -119,11 +80,9 @@ public class MainActivity extends Activity
 			}
 			Intent sendIntent = new Intent();
 			sendIntent.setAction(Intent.ACTION_SEND);
-			if (status == Status.Advanced)
-				sendIntent.putExtra(Intent.EXTRA_TEXT, all);
-			else if (status == Status.Simple)
+			if (status == Status.OfficialCid)
 				sendIntent.putExtra(Intent.EXTRA_TEXT, cid + "\r\n" + cidName);
-			else if (status == Status.NoOfficialCid)
+			else if (status == Status.UnofficialCid)
 				sendIntent.putExtra(Intent.EXTRA_TEXT, cid);
 			sendIntent.setType("text/plain");
 			startActivity(sendIntent);
@@ -131,56 +90,6 @@ public class MainActivity extends Activity
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-	}
-
-	private String getProperties() throws IOException
-	{
-		Scanner reader = new Scanner(Runtime.getRuntime().exec("getprop")
-				.getInputStream());
-
-		StringBuilder sb = new StringBuilder();
-		String seperator = System.getProperty("line.separator");
-
-		while (reader.hasNext())
-		{
-			String s1 = reader.nextLine();
-
-			sb.append(s1);
-			sb.append(seperator);
-		}
-
-		reader.close();
-
-		return sb.toString();
-	}
-
-	private String getCid() throws IOException
-	{
-		Scanner primary = new Scanner(Runtime.getRuntime()
-				.exec("getprop ro.cid").getInputStream());
-
-		while (primary.hasNext())
-		{
-			String s1 = primary.nextLine();
-			primary.close();
-
-			if (s1 != "")
-				return s1;
-		}
-
-		Scanner fallback = new Scanner(Runtime.getRuntime()
-				.exec("getprop ro.boot.cid").getInputStream());
-
-		while (fallback.hasNext())
-		{
-			String cid = fallback.nextLine();
-			fallback.close();
-
-			if (cid != "")
-				return cid;
-		}
-
-		return "";
 	}
 
 	private void fillHashMap()
@@ -287,16 +196,12 @@ public class MainActivity extends Activity
 		dic.put("BS_US002 ", "Edition");
 	}
 
-	private void assignStatusSimple()
+	private void assignStatusOfficialCid()
 	{
-		ll.setVisibility(View.VISIBLE);
-		svAll.setVisibility(View.GONE);
-	}
-
-	private void assignStatusAll()
-	{
-		ll.setVisibility(View.GONE);
-		svAll.setVisibility(View.VISIBLE);
+		tvCid.setVisibility(View.VISIBLE);
+		cidName = dic.get(cid);
+		tvCid.setText(cid);
+		tvCidName.setText(cidName);
 	}
 
 	private void assignStatusNoHtc()
@@ -305,39 +210,29 @@ public class MainActivity extends Activity
 		tvCidName.setText("No HTC device.");
 	}
 
-	private void assignStatusNoOfficialCid()
+	private void assignStatusUnofficialCid()
 	{
 		tvCidName.setTextSize(14f);
-		tvCidName.setText("No official CID in use.");
+		tvCidName.setText("Unofficial CID in use.");
 	}
 
 	public void onClick(View v)
 	{
-		setStatus(Status.Advanced);
+		// Start extended activity
+		ExtendedActivity act = new ExtendedActivity();
+		Intent intent = new Intent(this, act.getClass());
+		startActivity(intent);
 	}
 
 	public void setStatus(Status status)
 	{
 		switch (status)
 		{
-		case Simple:
-			assignStatusSimple();
-			if (cid == "")
-			{
-				setStatus(Status.NoHtc);
-				return;
-			}
-			else if (cidName == "")
-			{
-				setStatus(Status.NoOfficialCid);
-				return;
-			}
+		case OfficialCid:
+			assignStatusOfficialCid();
 			break;
-		case Advanced:
-			assignStatusAll();
-			break;
-		case NoOfficialCid:
-			assignStatusNoOfficialCid();
+		case UnofficialCid:
+			assignStatusUnofficialCid();
 			break;
 		case NoHtc:
 			assignStatusNoHtc();
@@ -349,6 +244,6 @@ public class MainActivity extends Activity
 
 	public enum Status
 	{
-		Simple, Advanced, NoOfficialCid, NoHtc
+		OfficialCid, UnofficialCid, NoHtc
 	}
 }

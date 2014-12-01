@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:icon="@drawable/ic_menu_moreoverflow_normal_holo_light"
-          android:showAsAction="always">
-          	<menu>
-          		<item android:id="@+id/simple"
-          		android:title="Simple" />
-          		<item android:id="@+id/advanced"
-          		android:title="Advanced" />
-          		<item android:id="@+id/share"
-          		android:title="Share" />
-          	</menu>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/share"
+        android:icon="@drawable/ic_share_grey600_48dp"
+        android:showAsAction="always"
+        android:title="Share">
     </item>
+
 </menu>
