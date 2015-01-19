@@ -139,6 +139,7 @@ public class MainActivity extends Activity
 		dic.put("HTC__M27", "HTC-Turkey");
 		dic.put("HTC__001", "HTC-WWE");
 		dic.put("HTC__039", "HTC-Australia");
+		dic.put("HTC__059", "Asian-Europe");
 		dic.put("HUTCH001", "Hutch-Australia");
 		dic.put("O2___102", "O2-DE");
 		dic.put("O2___001", "O2-UK");
