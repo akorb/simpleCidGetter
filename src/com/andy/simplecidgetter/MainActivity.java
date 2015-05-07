@@ -1,5 +1,6 @@
 package com.andy.simplecidgetter;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,6 +32,9 @@ public class MainActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		TextView tvReport = (TextView) findViewById(R.id.tvReport);
+		tvReport.setMovementMethod(LinkMovementMethod.getInstance());
 
 		tvCid = (TextView)findViewById(R.id.tvCid);
 		tvCidName = (TextView)findViewById(R.id.tvCidName);
@@ -45,7 +50,7 @@ public class MainActivity extends Activity
 		}
 		else if (dic.containsKey(cid))
 		{
-			setStatus(Status.OfficialCid);
+			setStatus(Status.UnofficialCid);
 		}
 		else
 		{
@@ -213,16 +218,27 @@ public class MainActivity extends Activity
 
 	private void assignStatusUnofficialCid()
 	{
-		tvCidName.setTextSize(14f);
-		tvCidName.setText("Unofficial CID in use.");
+		findViewById(R.id.tvReport).setVisibility(View.VISIBLE);
+		
+		tvCidName.setTextSize(20f);
+		tvCidName.setText("Unknown. ");
 	}
 
-	public void onClick(View v)
+	public void btnExpertMode_onClick(View v)
 	{
 		// Start extended activity
 		ExtendedActivity act = new ExtendedActivity();
 		Intent intent = new Intent(this, act.getClass());
 		startActivity(intent);
+	}
+	
+	public void tvReport_onClick(View v) throws IOException
+	{
+		new ReportCid().execute(cid);
+		
+		//URL yahoo = new URL("http://andykorb.puppis.uberspace.de/SCIDReport.php?cid=" + cid);
+        //URLConnection yc = yahoo.openConnection();
+        //yc.connect();
 	}
 
 	public void setStatus(Status status)
