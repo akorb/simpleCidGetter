@@ -38,7 +38,8 @@
                 android:onClick="tvReport_onClick"
                 android:text="Report?"
                 android:textSize="20sp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:textColor="@color/report_color" />
         </LinearLayout>
 
         <Button

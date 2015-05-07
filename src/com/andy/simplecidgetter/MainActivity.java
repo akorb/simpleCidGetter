@@ -6,9 +6,11 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,9 +34,6 @@ public class MainActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		TextView tvReport = (TextView) findViewById(R.id.tvReport);
-		tvReport.setMovementMethod(LinkMovementMethod.getInstance());
 
 		tvCid = (TextView)findViewById(R.id.tvCid);
 		tvCidName = (TextView)findViewById(R.id.tvCidName);
@@ -50,7 +49,7 @@ public class MainActivity extends Activity
 		}
 		else if (dic.containsKey(cid))
 		{
-			setStatus(Status.UnofficialCid);
+			setStatus(Status.OfficialCid);
 		}
 		else
 		{
@@ -219,7 +218,7 @@ public class MainActivity extends Activity
 	private void assignStatusUnofficialCid()
 	{
 		findViewById(R.id.tvReport).setVisibility(View.VISIBLE);
-		
+
 		tvCidName.setTextSize(20f);
 		tvCidName.setText("Unknown. ");
 	}
@@ -231,14 +230,33 @@ public class MainActivity extends Activity
 		Intent intent = new Intent(this, act.getClass());
 		startActivity(intent);
 	}
-	
+
 	public void tvReport_onClick(View v) throws IOException
 	{
-		new ReportCid().execute(cid);
-		
-		//URL yahoo = new URL("http://andykorb.puppis.uberspace.de/SCIDReport.php?cid=" + cid);
-        //URLConnection yc = yahoo.openConnection();
-        //yc.connect();
+		if (isOnline())
+		{
+			new ReportCid().execute(cid);
+
+			AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
+			dlgAlert.setMessage("Thanks for your report.");
+			dlgAlert.setPositiveButton("No problem", null);
+			dlgAlert.create().show();
+		}
+		else
+		{
+			AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
+			dlgAlert.setTitle("No internet connection");
+			dlgAlert.setMessage("Try again while you are online.");
+			dlgAlert.setPositiveButton("Okay", null);
+			dlgAlert.create().show();
+		}
+	}
+
+	public boolean isOnline()
+	{
+		ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		return netInfo != null && netInfo.isConnected();
 	}
 
 	public void setStatus(Status status)
