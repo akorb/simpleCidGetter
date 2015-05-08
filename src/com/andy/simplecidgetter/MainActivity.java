@@ -120,6 +120,7 @@ public class MainActivity extends Activity
 		dic.put("H3G__001", "H3G-UK");
 		dic.put("HTC__037", "Asia-SEA");
 		dic.put("HTC__044", "Asia-SEA-WWE");
+		dic.put("HTC__031", "South europe");
 		dic.put("HTC__023", "Australia");
 		dic.put("HTC__E41", "BE");
 		dic.put("HTC__C24", "Czech");
