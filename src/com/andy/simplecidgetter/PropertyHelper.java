@@ -1,6 +1,7 @@
 package com.andy.simplecidgetter;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Scanner;
 
 public final class PropertyHelper
@@ -66,16 +67,16 @@ public final class PropertyHelper
 	{
 		try
 		{
-			// The cid is stored usally stored in ro.cid
+			// The cid is stored usually stored in ro.cid
 			String primaryCid = getPropertyValue("ro.cid");
 			if (primaryCid != "")
-				return primaryCid;
+				return primaryCid.toUpperCase(Locale.getDefault());
 
 			// ro.cid does not exist for each device.
 			// I guess it's for GPE devices, but this isn't for sure yet.
 			String fallbackCid = getPropertyValue("ro.boot.cid");
 			if (fallbackCid != "")
-				return fallbackCid;
+				return fallbackCid.toUpperCase(Locale.getDefault());
 
 			// When cid does not exist, return empty string.
 			return "";
