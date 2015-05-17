@@ -118,6 +118,7 @@ public class MainActivity extends Activity
 		dic.put("H3G__003", "H3G-ROI");
 		dic.put("H3G__G04", "H3G-SWE");
 		dic.put("H3G__001", "H3G-UK");
+		dic.put("HTC__017", "Cincinnati Bell");
 		dic.put("HTC__037", "Asia-SEA");
 		dic.put("HTC__044", "Asia-SEA-WWE");
 		dic.put("HTC__031", "South europe");
