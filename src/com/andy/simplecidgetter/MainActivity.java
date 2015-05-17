@@ -101,7 +101,7 @@ public class MainActivity extends Activity
 		dic.put("11111111", "SuperCID");
 		dic.put("HTC__622", "Asia-HK-CHT");
 		dic.put("CWS__001", "ATT");
-		dic.put("BM_001", "BM");
+		dic.put("BM___001", "BM");
 		dic.put("BOUYG201", "Bouygues-Telecom");
 		dic.put("BSTAR502", "Brightstar-PTB");
 		dic.put("BSTAR301", "Brightstar-SPA");
