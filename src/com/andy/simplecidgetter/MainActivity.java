@@ -200,6 +200,7 @@ public class MainActivity extends Activity
 		dic.put("VODAP015", "VODA-Swisscom-WWE");
 		dic.put("VODAPM27", "VODA-TR");
 		dic.put("VODAP001", "VODA-UK");
+		dic.put("VZW__001", "Verizon");
 		dic.put("SPCS_004", "HarmanKardon");
 		dic.put("BS_US001", "Developer");
 		dic.put("BS_US002 ", "Edition");
