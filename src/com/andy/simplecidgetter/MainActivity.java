@@ -132,7 +132,7 @@ public class MainActivity extends Activity
 		dic.put("HTC__N34", "ELL");
 		dic.put("HTC__203", "FRA");
 		dic.put("HTC__247", "FRA-Bouygues");
-		dic.put("HTC__J15", "GCC");
+		dic.put("HTC__J15", "Arabic");
 		dic.put("HTC__102", "GER");
 		dic.put("HTC__038", "India");
 		dic.put("HTC__405", "ITA");
@@ -179,9 +179,10 @@ public class MainActivity extends Activity
 		dic.put("T-MOB008", "TMSK");
 		dic.put("T-MOB005", "TMUK");
 		dic.put("T-MOB010", "TMUS");
+		dic.put("HTC__A48", "Ukraine");
 		dic.put("HTC__621", "TWM-TW");
 		dic.put("VIRGI001", "VIRGIN-UK");
-		dic.put("HTC__016", "VODA-Africa-South");
+		dic.put("HTC__016", "S.Africa");
 		dic.put("VODAP021", "VODA-Australia");
 		dic.put("VODAP102", "VODA-Germany");
 		dic.put("VODAP006", "VODA-Greece");
