@@ -182,6 +182,7 @@ public class MainActivity extends Activity
 		dic.put("HTC__A48", "Ukraine");
 		dic.put("HTC__621", "TWM-TW");
 		dic.put("VIRGI001", "VIRGIN-UK");
+		dic.put("SPCS_002", "Virgin Mobile");
 		dic.put("HTC__016", "S.Africa");
 		dic.put("VODAP021", "VODA-Australia");
 		dic.put("VODAP102", "VODA-Germany");
