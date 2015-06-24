@@ -152,6 +152,7 @@ public class MainActivity extends Activity
 		dic.put("O2___102", "O2-DE");
 		dic.put("O2___001", "O2-UK");
 		dic.put("HTCCN701", "Open-Channel");
+		dic.put("HTCCN704", "China");
 		dic.put("OPTUS001", "Optus-Australia");
 		dic.put("ORANG113", "ORANGE-AT");
 		dic.put("ORANG012", "ORANGE-BE");
