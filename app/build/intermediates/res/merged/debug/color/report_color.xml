@@ -1,0 +1,6 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true" android:color="#376D5C"/>
+    <item android:color="#66BB6A"/>
+
+</selector><!-- From: file:/C:/Users/Andreas/Documents/Visual%20Studio%202015/Projects/SimpleCIDGetter/app/src/main/res/color/report_color.xml -->
