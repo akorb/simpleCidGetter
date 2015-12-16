@@ -148,8 +148,8 @@ public class MainActivity extends Activity
 		dic.put("HTC__001", "WWE");
 		dic.put("HTC__039", "Australia");
 		dic.put("HTC__059", "Asian-Europe");
-        dic.put("HTC__K18 ", "Israel");
-        dic.put("HTC__058 ", "Myanmar");
+        dic.put("HTC__K18", "Israel");
+        dic.put("HTC__058", "Myanmar");
 		dic.put("HUTCH001", "Hutch-Australia");
 		dic.put("O2___102", "O2-DE");
 		dic.put("O2___001", "O2-UK");
@@ -210,7 +210,11 @@ public class MainActivity extends Activity
 		dic.put("SPCS_001", "Sprint");
 		dic.put("SPCS_004", "HarmanKardon");
 		dic.put("BS_US001", "Developer Edition");
-		dic.put("BS_US002 ", "Developer Edition");
+		dic.put("BS_US002", "Developer Edition");
+		dic.put("UTSI_005", "Bluegrass Cellular");
+		dic.put("ACG__001", "nTelos");
+		dic.put("METRO001", "MetroPCS");
+		dic.put("ATT__001", "AT&T");
 	}
 
 	private void assignStatusOfficialCid()
