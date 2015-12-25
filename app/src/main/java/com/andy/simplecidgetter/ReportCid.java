@@ -15,10 +15,10 @@ import android.os.AsyncTask;
 public class ReportCid extends AsyncTask<String, Integer, Object>
 {
 
-	@Override
-	protected Object doInBackground(String... args)
-	{
-		try {
+    @Override
+    protected Object doInBackground(String... args)
+    {
+        try {
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://andykorb.puppis.uberspace.de/SCIDReport.php");
 
@@ -32,8 +32,8 @@ public class ReportCid extends AsyncTask<String, Integer, Object>
         } catch (Exception e) {
             e.printStackTrace();
         }
-		
-		return null;
-	}
+
+        return null;
+    }
 
 }

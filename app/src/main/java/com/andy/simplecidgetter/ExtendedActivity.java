@@ -36,16 +36,16 @@ public class ExtendedActivity extends Activity
 		// Handle item selection
 		switch (item.getItemId())
 		{
-		case R.id.share:
-			Intent sendIntent = new Intent();
-			sendIntent.setType("text/plain");
-			sendIntent.setAction(Intent.ACTION_SEND);
-			sendIntent.putExtra(Intent.EXTRA_TEXT, PropertyHelper.getAll());
+			case R.id.share:
+				Intent sendIntent = new Intent();
+				sendIntent.setType("text/plain");
+				sendIntent.setAction(Intent.ACTION_SEND);
+				sendIntent.putExtra(Intent.EXTRA_TEXT, PropertyHelper.getAll());
 
-			startActivity(sendIntent);
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
+				startActivity(sendIntent);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
 		}
 	}
 }

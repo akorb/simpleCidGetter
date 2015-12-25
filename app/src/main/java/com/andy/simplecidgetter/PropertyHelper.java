@@ -10,7 +10,7 @@ public final class PropertyHelper
 	{
 		// Hide constructor
 	}
-	
+
 	public static String getAll()
 	{
 		try
