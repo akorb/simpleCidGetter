@@ -91,6 +91,12 @@ public class MainActivity extends Activity
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
                 return true;
+            case R.id.help:
+                // Start help activity
+                HelpActivity act = new HelpActivity();
+                Intent intent = new Intent(this, act.getClass());
+                startActivity(intent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

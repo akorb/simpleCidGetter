@@ -8,4 +8,11 @@
         android:title="Share">
     </item>
 
+    <item
+        android:id="@+id/help"
+        android:icon="@drawable/ic_menu_help_holo_light"
+        android:showAsAction="always"
+        android:title="Help">
+    </item>
+
 </menu>
