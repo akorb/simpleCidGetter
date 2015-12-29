@@ -1,28 +1,36 @@
 package com.andy.simplecidgetter;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class MainActivity extends Activity
-{
+import java.util.HashMap;
+import java.util.Map;
+
+public class CidFragment extends Fragment implements IShareable {
+
+    static CidFragment instance;
+
+    public static CidFragment getInstance() {
+        if (instance == null)
+            instance = new CidFragment();
+
+        return instance;
+    }
+
     Map<String, String> dic = new HashMap<String, String>();
 
     TextView tvCid;
     TextView tvCidName;
+    TextView tvReport;
 
     String cid = "";
     String cidName = "";
@@ -30,80 +38,82 @@ public class MainActivity extends Activity
     Status status = Status.OfficialCid;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        fillHashMap();
+    }
 
-        tvCid = (TextView)findViewById(R.id.tvCid);
-        tvCidName = (TextView)findViewById(R.id.tvCidName);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_main, container, false);
+        tvCid = (TextView) view.findViewById(R.id.tvCid);
+        tvCidName = (TextView) view.findViewById(R.id.tvCidName);
+        tvReport = (TextView) view.findViewById(R.id.tvReport);
+        tvReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (cid.length() != 8) {
+                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(view.getContext());
+                    dlgAlert.setMessage("A valid CID has 8 letters.\r\nYours has " + cid.length() + ".");
+                    dlgAlert.setPositiveButton("OK", null);
+                    dlgAlert.create().show();
+                    return;
+                }
+
+                if (isOnline()) {
+                    new ReportCid().execute(cid);
+
+                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(view.getContext());
+                    dlgAlert.setMessage("Thanks for your report.");
+                    dlgAlert.setPositiveButton("No problem", null);
+                    dlgAlert.create().show();
+                } else {
+                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(view.getContext());
+                    dlgAlert.setTitle("No internet connection");
+                    dlgAlert.setMessage("Try again while you are online.");
+                    dlgAlert.setPositiveButton("Okay", null);
+                    dlgAlert.create().show();
+                }
+            }
+        });
 
         cid = PropertyHelper.getCid();
         tvCid.setText(cid);
 
-        fillHashMap();
 
-        if (cid == "")
-        {
+        if (cid == "") {
             setStatus(Status.NoHtc);
-        }
-        else if (dic.containsKey(cid))
-        {
+        } else if (dic.containsKey(cid)) {
             setStatus(Status.OfficialCid);
-        }
-        else
-        {
+        } else {
             setStatus(Status.UnofficialCid);
         }
+
+        return view;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
+    public void Share(View view)
     {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        // Handle item selection
-        switch (item.getItemId())
+        if (status == CidFragment.Status.NoHtc)
         {
-            case R.id.share:
-                if (status == Status.NoHtc)
-                {
-                    AlertDialog.Builder ad = new AlertDialog.Builder(this,
-                            AlertDialog.THEME_HOLO_LIGHT)
-                            .setMessage("No info to share.");
+            AlertDialog.Builder ad = new AlertDialog.Builder(view.getContext(),
+                    AlertDialog.THEME_HOLO_LIGHT)
+                    .setMessage("No info to share.");
 
-                    ad.show();
-
-                    return true;
-                }
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                if (status == Status.OfficialCid)
-                    sendIntent.putExtra(Intent.EXTRA_TEXT, cid + "\r\n" + cidName);
-                else if (status == Status.UnofficialCid)
-                    sendIntent.putExtra(Intent.EXTRA_TEXT, cid);
-                sendIntent.setType("text/plain");
-                startActivity(sendIntent);
-                return true;
-            case R.id.help:
-                // Start help activity
-                HelpActivity act = new HelpActivity();
-                Intent intent = new Intent(this, act.getClass());
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+            ad.show();
+            return;
         }
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        if (status == CidFragment.Status.OfficialCid)
+            sendIntent.putExtra(Intent.EXTRA_TEXT, cid + "\r\n" + cidName);
+        else if (status == CidFragment.Status.UnofficialCid)
+            sendIntent.putExtra(Intent.EXTRA_TEXT, cid);
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
     }
 
-    private void fillHashMap()
-    {
+    private void fillHashMap() {
         dic.put("11111111", "SuperCID");
         dic.put("HTC__622", "Asia-HK-CHT");
         dic.put("CWS__001", "ATT");
@@ -223,77 +233,33 @@ public class MainActivity extends Activity
         dic.put("ATT__001", "AT&T");
     }
 
-    private void assignStatusOfficialCid()
-    {
+    private void assignStatusOfficialCid() {
         tvCid.setVisibility(View.VISIBLE);
         cidName = dic.get(cid);
         tvCid.setText(cid);
         tvCidName.setText(cidName);
     }
 
-    private void assignStatusNoHtc()
-    {
+    private void assignStatusNoHtc() {
         tvCid.setVisibility(View.GONE);
         tvCidName.setText("No HTC device.");
     }
 
-    private void assignStatusUnofficialCid()
-    {
-        findViewById(R.id.tvReport).setVisibility(View.VISIBLE);
+    private void assignStatusUnofficialCid() {
+        tvReport.setVisibility(View.VISIBLE);
 
         tvCidName.setTextSize(20f);
         tvCidName.setText("Unknown. ");
     }
 
-    public void btnExpertMode_onClick(View v)
-    {
-        // Start extended activity
-        ExtendedActivity act = new ExtendedActivity();
-        Intent intent = new Intent(this, act.getClass());
-        startActivity(intent);
-    }
-
-    public void tvReport_onClick(View v) throws IOException
-    {
-        if (cid.length() != 8)
-        {
-            AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
-            dlgAlert.setMessage("A valid CID has 8 letters.\r\nYours has " + cid.length() + ".");
-            dlgAlert.setPositiveButton("OK", null);
-            dlgAlert.create().show();
-            return;
-        }
-
-        if (isOnline())
-        {
-            new ReportCid().execute(cid);
-
-            AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
-            dlgAlert.setMessage("Thanks for your report.");
-            dlgAlert.setPositiveButton("No problem", null);
-            dlgAlert.create().show();
-        }
-        else
-        {
-            AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
-            dlgAlert.setTitle("No internet connection");
-            dlgAlert.setMessage("Try again while you are online.");
-            dlgAlert.setPositiveButton("Okay", null);
-            dlgAlert.create().show();
-        }
-    }
-
-    public boolean isOnline()
-    {
-        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getView().getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnected();
     }
 
-    public void setStatus(Status status)
-    {
-        switch (status)
-        {
+    public void setStatus(Status status) {
+        switch (status) {
             case OfficialCid:
                 assignStatusOfficialCid();
                 break;
@@ -308,8 +274,7 @@ public class MainActivity extends Activity
         this.status = status;
     }
 
-    public enum Status
-    {
+    public enum Status {
         OfficialCid, UnofficialCid, NoHtc
     }
 }
