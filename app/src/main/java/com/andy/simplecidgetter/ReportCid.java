@@ -1,12 +1,12 @@
 package com.andy.simplecidgetter;
 
+import android.os.AsyncTask;
+
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import android.os.AsyncTask;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -34,25 +34,25 @@ public class ReportCid extends AsyncTask<String, Integer, Object>
             urlConnection = (HttpsURLConnection) url.openConnection();
             urlConnection.setRequestMethod("POST");
             urlConnection.setDoOutput(true);
-            urlConnection.setChunkedStreamingMode(0);
+            urlConnection.setFixedLengthStreamingMode(outputArray.length);
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
 
-        try {
+        try
+        {
             OutputStream out = new BufferedOutputStream(urlConnection.getOutputStream());
             out.write(outputArray);
             out.close();
-
-            urlConnection.getInputStream();
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
-        finally {
+        finally
+        {
             urlConnection.disconnect();
         }
         return null;
