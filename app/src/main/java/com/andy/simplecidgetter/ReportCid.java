@@ -1,16 +1,14 @@
 package com.andy.simplecidgetter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import android.os.AsyncTask;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class ReportCid extends AsyncTask<String, Integer, Object>
 {
@@ -18,21 +16,45 @@ public class ReportCid extends AsyncTask<String, Integer, Object>
     @Override
     protected Object doInBackground(String... args)
     {
-        try {
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://andykorb.puppis.uberspace.de/SCIDReport.php");
-
-            // Add your data
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-            nameValuePairs.add(new BasicNameValuePair("cid", args[0]));
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-            // Execute HTTP Post Request
-            httpclient.execute(httppost);
-        } catch (Exception e) {
+        URL url = null;
+        try
+        {
+            url = new URL("https://andykorb.puppis.uberspace.de/SCIDReport.php");
+        }
+        catch (MalformedURLException e)
+        {
             e.printStackTrace();
         }
 
+        byte[] outputArray = ("cid=" + args[0]).getBytes();
+
+        HttpsURLConnection urlConnection = null;
+        try
+        {
+            urlConnection = (HttpsURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setDoOutput(true);
+            urlConnection.setChunkedStreamingMode(0);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        try {
+            OutputStream out = new BufferedOutputStream(urlConnection.getOutputStream());
+            out.write(outputArray);
+            out.close();
+
+            urlConnection.getInputStream();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        finally {
+            urlConnection.disconnect();
+        }
         return null;
     }
 
