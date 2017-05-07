@@ -19,14 +19,14 @@ public final class PropertyHelper
 					.getInputStream());
 
 			StringBuilder sb = new StringBuilder();
-			String seperator = System.getProperty("line.separator");
+			String separator = System.getProperty("line.separator");
 
 			while (reader.hasNext())
 			{
 				String s1 = reader.nextLine();
 
 				sb.append(s1);
-				sb.append(seperator);
+				sb.append(separator);
 			}
 
 			reader.close();

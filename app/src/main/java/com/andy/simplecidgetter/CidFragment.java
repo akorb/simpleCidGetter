@@ -77,7 +77,9 @@ public class CidFragment extends Fragment implements IShareable {
             }
         });
 
-        cid = PropertyHelper.getCid();
+        //cid = PropertyHelper.getCid();
+        // DEBUG
+        cid = "11111111";
         tvCid.setText(cid);
 
 
