@@ -66,13 +66,13 @@ public class CidFragment extends Fragment implements IShareable {
                     AlertDialog.Builder dlgAlert = new AlertDialog.Builder(view.getContext());
                     dlgAlert.setMessage("Thanks for your report.");
                     dlgAlert.setPositiveButton("No problem", null);
-                    dlgAlert.create().show();
+                    dlgAlert.show();
                 } else {
                     AlertDialog.Builder dlgAlert = new AlertDialog.Builder(view.getContext());
                     dlgAlert.setTitle("No internet connection");
                     dlgAlert.setMessage("Try again while you are online.");
                     dlgAlert.setPositiveButton("Okay", null);
-                    dlgAlert.create().show();
+                    dlgAlert.show();
                 }
             }
         });
@@ -96,8 +96,7 @@ public class CidFragment extends Fragment implements IShareable {
     {
         if (status == CidFragment.Status.NoHtc)
         {
-            AlertDialog.Builder ad = new AlertDialog.Builder(view.getContext(),
-                    AlertDialog.THEME_HOLO_LIGHT)
+            AlertDialog.Builder ad = new AlertDialog.Builder(view.getContext())
                     .setMessage("No info to share.");
 
             ad.show();
@@ -242,14 +241,14 @@ public class CidFragment extends Fragment implements IShareable {
 
     private void assignStatusNoHtc() {
         tvCid.setVisibility(View.GONE);
-        tvCidName.setText("No HTC device.");
+        tvCidName.setText("No HTC device");
     }
 
     private void assignStatusUnofficialCid() {
         tvReport.setVisibility(View.VISIBLE);
 
         tvCidName.setTextSize(20f);
-        tvCidName.setText("Unknown. ");
+        tvCidName.setText("Unknown");
     }
 
     public boolean isOnline() {
