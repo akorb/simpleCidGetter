@@ -135,6 +135,7 @@ public class CidFragment extends Fragment implements IShareable {
         dic.put("H3G__003", "H3G-ROI");
         dic.put("H3G__G04", "H3G-SWE");
         dic.put("H3G__001", "H3G-UK");
+        dic.put("H3G__106", "H3G-AT");
         dic.put("HTC__002", "Europe");
         dic.put("HTC__017", "Cincinnati Bell");
         dic.put("HTC__037", "Asia-SEA");
@@ -146,6 +147,7 @@ public class CidFragment extends Fragment implements IShareable {
         dic.put("HTC__F08", "Denmark");
         dic.put("HTC__E11", "Dutch");
         dic.put("HTC__032", "EastEurope");
+        dic.put("HTC__034", "Europe");
         dic.put("HTC__N34", "ELL");
         dic.put("HTC__203", "FRA");
         dic.put("HTC__247", "FRA-Bouygues");
@@ -224,6 +226,7 @@ public class CidFragment extends Fragment implements IShareable {
         dic.put("VODAPM27", "VODA-TR");
         dic.put("VODAP001", "VODA-UK");
         dic.put("VZW__001", "Verizon");
+        dic.put("VZW__003", "Verizon");
         dic.put("SPCS_001", "Sprint");
         dic.put("SPCS_004", "HarmanKardon");
         dic.put("BS_US001", "Developer Edition");
@@ -232,6 +235,8 @@ public class CidFragment extends Fragment implements IShareable {
         dic.put("ACG__001", "nTelos");
         dic.put("METRO001", "MetroPCS");
         dic.put("ATT__001", "AT&T");
+        dic.put("VIDEO001", "CA_Videotron");
+        dic.put("LRA__001", "Bluegrass Cellular");
     }
 
     private void assignStatusOfficialCid() {
