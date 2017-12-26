@@ -46,15 +46,15 @@ public class CidFragment extends Fragment implements IShareable {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_main, container, false);
-        tvCid = (TextView) view.findViewById(R.id.tvCid);
-        tvCidName = (TextView) view.findViewById(R.id.tvCidName);
-        tvReport = (TextView) view.findViewById(R.id.tvReport);
+        tvCid = view.findViewById(R.id.tvCid);
+        tvCidName = view.findViewById(R.id.tvCidName);
+        tvReport = view.findViewById(R.id.tvReport);
         tvReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (cid.length() != 8) {
                     AlertDialog.Builder dlgAlert = new AlertDialog.Builder(view.getContext());
-                    dlgAlert.setMessage("A valid CID has 8 letters.\r\nYours has " + cid.length() + ".");
+                    dlgAlert.setMessage("A valid CID has 8 letters.\nYours has " + cid.length() + ".");
                     dlgAlert.setPositiveButton("OK", null);
                     dlgAlert.create().show();
                     return;
@@ -77,13 +77,13 @@ public class CidFragment extends Fragment implements IShareable {
             }
         });
 
-        //cid = PropertyHelper.getCid();
+        cid = PropertyHelper.getCid();
         // DEBUG
-        cid = "11111111";
+        // cid = "11111111";
         tvCid.setText(cid);
 
 
-        if (cid == "") {
+        if (cid.isEmpty()) {
             setStatus(Status.NoHtc);
         } else if (dic.containsKey(cid)) {
             setStatus(Status.OfficialCid);
@@ -107,7 +107,7 @@ public class CidFragment extends Fragment implements IShareable {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         if (status == CidFragment.Status.OfficialCid)
-            sendIntent.putExtra(Intent.EXTRA_TEXT, cid + "\r\n" + cidName);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, cid + "\n" + cidName);
         else if (status == CidFragment.Status.UnofficialCid)
             sendIntent.putExtra(Intent.EXTRA_TEXT, cid);
         sendIntent.setType("text/plain");
