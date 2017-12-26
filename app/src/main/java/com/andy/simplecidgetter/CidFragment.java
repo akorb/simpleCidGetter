@@ -237,6 +237,8 @@ public class CidFragment extends Fragment implements IShareable {
         dic.put("ATT__001", "AT&T");
         dic.put("VIDEO001", "CA_Videotron");
         dic.put("LRA__001", "Bluegrass Cellular");
+        dic.put("KDDI_801", "KDDI Corporation");
+        dic.put("SPCS_651", "Visma Spcs AB");
     }
 
     private void assignStatusOfficialCid() {
