@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -79,7 +80,7 @@ public class CidFragment extends Fragment implements IShareable {
 
         cid = PropertyHelper.getCid();
         // DEBUG
-        // cid = "11111111";
+        //cid = "11111111";
         tvCid.setText(cid);
 
 
@@ -98,10 +99,7 @@ public class CidFragment extends Fragment implements IShareable {
     {
         if (status == CidFragment.Status.NoHtc)
         {
-            AlertDialog.Builder ad = new AlertDialog.Builder(view.getContext())
-                    .setMessage("No info to share.");
-
-            ad.show();
+            Toast.makeText(view.getContext(), "No info to share.", Toast.LENGTH_LONG).show();
             return;
         }
         Intent sendIntent = new Intent();
