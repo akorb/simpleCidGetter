@@ -1,11 +1,7 @@
 package com.andy.simplecidgetter;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,34 +45,6 @@ public class CidFragment extends Fragment implements IShareable {
         View view = inflater.inflate(R.layout.activity_main, container, false);
         tvCid = view.findViewById(R.id.tvCid);
         tvCidName = view.findViewById(R.id.tvCidName);
-        tvReport = view.findViewById(R.id.tvReport);
-        tvReport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (cid.length() != 8) {
-                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(view.getContext());
-                    dlgAlert.setMessage("A valid CID has 8 letters.\nYours has " + cid.length() + ".");
-                    dlgAlert.setPositiveButton("OK", null);
-                    dlgAlert.create().show();
-                    return;
-                }
-
-                if (isOnline()) {
-                    new ReportCid().execute(cid);
-
-                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(view.getContext());
-                    dlgAlert.setMessage("Thanks for your report.");
-                    dlgAlert.setPositiveButton("No problem", null);
-                    dlgAlert.show();
-                } else {
-                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(view.getContext());
-                    dlgAlert.setTitle("No internet connection");
-                    dlgAlert.setMessage("Try again while you are online.");
-                    dlgAlert.setPositiveButton("Okay", null);
-                    dlgAlert.show();
-                }
-            }
-        });
 
         cid = PropertyHelper.getCid();
         // DEBUG
@@ -256,12 +224,6 @@ public class CidFragment extends Fragment implements IShareable {
 
         tvCidName.setTextSize(20f);
         tvCidName.setText("Unknown");
-    }
-
-    public boolean isOnline() {
-        ConnectivityManager cm = (ConnectivityManager) getView().getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnected();
     }
 
     public void setStatus(Status status) {
