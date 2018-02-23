@@ -55,7 +55,7 @@
             android:layout_below="@+id/textView3"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:text="It&apos;s a string of letters and numbers, eight characters long that identifies what carrier your phone is from. When you flash an OTA or RUU, it checks for a few things, one of those things is the CID, to ensure you are flashing software intended for your device. Realistically, There&apos;s no hardware difference between HTC devices (with the exception of CDMA vs GSM) so all firmwares/softwares should be compatible. There have been occasions where flashing an RUU or OTA with the wrong CID or SuperCID while S-On would brick your phone. So try to be mindful of this and be careful."
+            android:text="It&apos;s a string of letters and numbers, eight characters long that identifies what carrier your phone is from. When you flash an OTA or RUU, it checks for a few things, one of those things is the CID, to ensure you are flashing software intended for your device. Realistically, there&apos;s no hardware difference between HTC devices (with the exception of CDMA vs GSM) so all firmwares/softwares should be compatible. There have been occasions where flashing an RUU or OTA with the wrong CID or SuperCID while S-On would brick your phone. So try to be mindful of this and be careful."
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
 </ScrollView>
