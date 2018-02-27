@@ -27,7 +27,6 @@ public class CidFragment extends Fragment implements IShareable {
 
     TextView tvCid;
     TextView tvCidName;
-    TextView tvReport;
 
     String cid = "";
     String cidName = "";
@@ -220,8 +219,6 @@ public class CidFragment extends Fragment implements IShareable {
     }
 
     private void assignStatusUnofficialCid() {
-        tvReport.setVisibility(View.VISIBLE);
-
         tvCidName.setTextSize(20f);
         tvCidName.setText("Unknown");
     }
