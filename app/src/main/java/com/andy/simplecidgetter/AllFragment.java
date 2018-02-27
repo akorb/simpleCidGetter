@@ -10,15 +10,6 @@ import android.widget.TextView;
 
 public class AllFragment extends Fragment implements IShareable {
 
-    static AllFragment instance;
-
-    public static AllFragment getInstance() {
-        if (instance == null)
-            instance = new AllFragment();
-
-        return instance;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_advanced, container, false);

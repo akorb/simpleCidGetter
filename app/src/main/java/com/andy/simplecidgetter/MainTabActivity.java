@@ -132,9 +132,10 @@ public class MainTabActivity extends Activity implements ActionBar.TabListener {
         @Override
         public Fragment getItem(int position) {
             if (position == 0) {
-                return CidFragment.getInstance();
-            } else if (position == 1) {
-                return AllFragment.getInstance();
+                return new CidFragment();
+            }
+            if (position == 1) {
+                return new AllFragment();
             }
 
             return null;
