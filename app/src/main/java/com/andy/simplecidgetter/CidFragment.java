@@ -14,15 +14,15 @@ import java.util.Map;
 
 public class CidFragment extends Fragment implements IShareable {
 
-    Map<String, String> dic = new HashMap<>();
+    private final Map<String, String> dic = new HashMap<>();
 
-    TextView tvCid;
-    TextView tvCidName;
+    private TextView tvCid;
+    private TextView tvCidName;
 
-    String cid = "";
-    String cidName = "";
+    private String cid = "";
+    private String cidName = "";
 
-    Status status = Status.OfficialCid;
+    private Status status = Status.OfficialCid;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -215,7 +215,7 @@ public class CidFragment extends Fragment implements IShareable {
         tvCidName.setText("Unknown");
     }
 
-    public void setStatus(Status status) {
+    private void setStatus(Status status) {
         switch (status) {
             case OfficialCid:
                 assignStatusOfficialCid();

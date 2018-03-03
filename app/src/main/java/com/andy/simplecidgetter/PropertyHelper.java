@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
 
-public final class PropertyHelper
+final class PropertyHelper
 {
 	private PropertyHelper()
 	{
@@ -40,22 +40,25 @@ public final class PropertyHelper
 	}
 
 	public static String getPropertyValue(String propertyName)
-			throws IOException
 	{
 		try
 		{
 			Scanner reader = new Scanner(Runtime.getRuntime()
 					.exec("getprop " + propertyName).getInputStream());
 
-			while (reader.hasNext())
+			String result;
+
+			if (reader.hasNext())
 			{
-				String result = reader.nextLine();
-				reader.close();
-				return result;
+				result = reader.nextLine();
+			}
+			else
+			{
+				result = "";
 			}
 
 			reader.close();
-			return "";
+			return result;
 		}
 		catch (IOException ex)
 		{
@@ -65,25 +68,16 @@ public final class PropertyHelper
 
 	public static String getCid()
 	{
-		try
-		{
-			// The cid is stored usually stored in ro.cid
-			String primaryCid = getPropertyValue("ro.cid");
-			if (primaryCid != "")
-				return primaryCid.toUpperCase(Locale.getDefault());
-
+		// The cid is stored usually stored in ro.cid
+		String primaryCid = getPropertyValue("ro.cid");
+		if (!primaryCid.isEmpty())
+			return primaryCid.toUpperCase(Locale.getDefault());
 			// ro.cid does not exist for each device.
-			// I guess it's for GPE devices, but this isn't for sure yet.
-			String fallbackCid = getPropertyValue("ro.boot.cid");
-			if (fallbackCid != "")
-				return fallbackCid.toUpperCase(Locale.getDefault());
-
-			// When cid does not exist, return empty string.
-			return "";
-		}
-		catch (IOException ex)
-		{
-			return "";
-		}
+		// I guess it's for GPE devices, but this isn't for sure yet.
+		String fallbackCid = getPropertyValue("ro.boot.cid");
+		if (!fallbackCid.isEmpty())
+			return fallbackCid.toUpperCase(Locale.getDefault());
+		// When cid does not exist, return empty string.
+		return "";
 	}
 }
