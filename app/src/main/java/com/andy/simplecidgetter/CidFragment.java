@@ -109,6 +109,7 @@ public class CidFragment extends Fragment implements IShareable {
         dic.put("HTC__247", "FRA-Bouygues");
         dic.put("HTC__J15", "Arabic");
         dic.put("HTC__102", "GER");
+        dic.put("HTC__060", "India");
         dic.put("HTC__038", "India");
         dic.put("HTC__405", "ITA");
         dic.put("HTC__Y13", "Nor");
