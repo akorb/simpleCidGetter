@@ -90,7 +90,7 @@ public class MainTabActivity extends Activity implements ActionBar.TabListener {
         switch (id) {
             case R.id.share:
                 int curItem = mViewPager.getCurrentItem();
-                IShareable sp = (IShareable) mSectionsPagerAdapter.getItem(curItem);
+                IShareable sp = (IShareable) (mSectionsPagerAdapter.instantiateItem(mViewPager, curItem));
                 sp.Share(findViewById(android.R.id.content));
                 return true;
             case R.id.help:
