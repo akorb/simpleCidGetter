@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class CidFragment extends Fragment implements IShareable {
 
-    Map<String, String> dic = new HashMap<String, String>();
+    Map<String, String> dic = new HashMap<>();
 
     TextView tvCid;
     TextView tvCidName;
