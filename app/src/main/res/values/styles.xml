@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="GreenTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/customPrimaryColor</item>
+        <item name="colorPrimaryDark">#388E3C</item>
+        <item name="android:textColorPrimary">@color/customTextColorPrimary</item>
+
+        <!-- hide appbar shadow pre-Lollipop -->
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+</resources>

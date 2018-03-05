@@ -8,7 +8,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="Simple CID Getter"
-        android:theme="@style/Theme.AppCompat.Light">
+        android:theme="@style/GreenTheme">
         <activity
             android:name=".MainTabActivity"
             android:label="Simple CID Getter">
