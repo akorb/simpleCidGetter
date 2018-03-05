@@ -4,13 +4,13 @@
 
     <item
         android:id="@+id/share"
-        android:icon="@drawable/ic_share_grey600_48dp"
+        android:icon="@drawable/ic_share_black_24dp"
         android:title="Share"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/help"
-        android:icon="@drawable/ic_menu_help_holo_light"
+        android:icon="@drawable/ic_info_outline_black_24dp"
         android:title="Help"
         app:showAsAction="ifRoom" />
 
