@@ -32,7 +32,7 @@ public class MainTabActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_tab);
+        setContentView(R.layout.activity_main);
 
         getSupportActionBar().setElevation(0); // disable shadow for appbar
 

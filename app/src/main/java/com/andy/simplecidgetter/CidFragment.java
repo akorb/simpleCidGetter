@@ -33,7 +33,7 @@ public class CidFragment extends Fragment implements IShareable {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_cid, container, false);
         tvCid = view.findViewById(R.id.tvCid);
         tvCidName = view.findViewById(R.id.tvCidName);
 

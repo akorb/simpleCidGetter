@@ -13,7 +13,7 @@ public class AllFragment extends Fragment implements IShareable {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_advanced, container, false);
+        View view = inflater.inflate(R.layout.fragment_all, container, false);
         TextView tvAll = view.findViewById(R.id.tvAll);
         tvAll.setText(PropertyHelper.getAll());
 
