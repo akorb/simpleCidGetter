@@ -66,9 +66,9 @@ public class MainTabActivity extends AppCompatActivity {
                 IShareable sp = (IShareable) (mSectionsPagerAdapter.instantiateItem(mViewPager, curItem));
                 sp.Share(findViewById(android.R.id.content));
                 return true;
-            case R.id.help:
-                // Start help activity
-                HelpActivity act = new HelpActivity();
+            case R.id.info:
+                // Start info activity
+                InfoActivity act = new InfoActivity();
                 Intent intent = new Intent(this, act.getClass());
                 startActivity(intent);
                 return true;

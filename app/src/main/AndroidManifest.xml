@@ -19,8 +19,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HelpActivity"
-            android:label="Help"
+            android:name=".InfoActivity"
+            android:label="Info"
             android:parentActivityName=".MainTabActivity" />
     </application>
 
