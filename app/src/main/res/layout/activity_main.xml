@@ -14,6 +14,9 @@
         android:elevation="4dp"
         app:tabBackground="@color/customPrimaryColor"
         app:tabIndicatorColor="@android:color/white"
+        app:tabMode="fixed"
+        app:tabMaxWidth="0dp"
+        app:tabGravity="fill"
         tools:targetApi="lollipop" />
 
 </android.support.v4.view.ViewPager>
