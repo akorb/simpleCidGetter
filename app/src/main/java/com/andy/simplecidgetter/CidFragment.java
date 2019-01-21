@@ -15,7 +15,14 @@ import java.util.Map;
 
 public class CidFragment extends Fragment implements IShareable {
 
-    private final Map<String, String> dic = new HashMap<>();
+    /*
+    More than the actual expected items (CIDs)
+    because we want enough space that no collisions happen.
+
+    256 because Java uses only power of two values.
+    Giving 200 or something similar would give the same initial capacity.
+     */
+    private final Map<String, String> dic = new HashMap<>(256);
 
     private TextView tvCid;
     private TextView tvCidName;
