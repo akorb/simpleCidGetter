@@ -9,7 +9,7 @@ final class PropertyHelper {
         // Hide constructor
     }
 
-    public static String getAll() {
+    static String getAll() {
         try {
             Scanner reader = new Scanner(Runtime.getRuntime().exec("getprop")
                     .getInputStream());
@@ -32,7 +32,7 @@ final class PropertyHelper {
         }
     }
 
-    public static String getPropertyValue(String propertyName) {
+    static String getPropertyValue(String propertyName) {
         try {
             Scanner reader = new Scanner(Runtime.getRuntime()
                     .exec("getprop " + propertyName).getInputStream());
@@ -52,7 +52,7 @@ final class PropertyHelper {
         }
     }
 
-    public static String getCid() {
+    static String getCid() {
         // The cid is stored usually stored in ro.cid
         String primaryCid = getPropertyValue("ro.cid");
         if (!primaryCid.isEmpty())
