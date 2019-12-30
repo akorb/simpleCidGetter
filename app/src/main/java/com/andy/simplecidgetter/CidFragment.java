@@ -194,8 +194,8 @@ public class CidFragment extends Fragment implements IShareable {
         dic.put("VZW__003", "Verizon");
         dic.put("SPCS_001", "Sprint");
         dic.put("SPCS_004", "HarmanKardon");
-        dic.put("BS_US001", "Developer Edition");
-        dic.put("BS_US002", "Developer Edition");
+        dic.put("BS_US001", "US Unlocked");
+        dic.put("BS_US002", "US Unlocked");
         dic.put("UTSI_005", "Bluegrass Cellular");
         dic.put("ACG__001", "nTelos");
         dic.put("METRO001", "MetroPCS");
