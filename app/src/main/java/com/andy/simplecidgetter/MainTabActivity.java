@@ -5,30 +5,27 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.widget.ViewPager2;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MainTabActivity extends AppCompatActivity {
 
     /**
-     * The {@link androidx.viewpager.widget.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link androidx.fragment.app.FragmentStatePagerAdapter}.
+     * The {@link ViewPager2} that will host the section contents.
      */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private ViewPager2 mViewPager;
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
-    private ViewPager mViewPager;
+    private Cid cid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +34,31 @@ public class MainTabActivity extends AppCompatActivity {
 
         getSupportActionBar().setElevation(0); // disable shadow for appbar
 
-        // Create the adapter that will return a fragment for each of the three
+        cid = new Cid();
+
+        // Create the adapter that will return a fragment for each of the two
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(this.getSupportFragmentManager(), this.getLifecycle());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        new TabLayoutMediator(tabLayout, mViewPager,
+                (tab, position) -> tab.setText(getPageTitle(position))
+        ).attach();
+    }
+
+    private static String getPageTitle(int position) {
+        switch (position) {
+            case 0:
+                return "CID";
+            case 1:
+                return "All";
+        }
+
+        throw new IllegalArgumentException();
     }
 
 
@@ -52,6 +67,21 @@ public class MainTabActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+    private void share() {
+        int curItem = mViewPager.getCurrentItem();
+
+        if (cid.getState() == Cid.State.NoHtc && curItem == 0) {
+            Toast.makeText(this.getApplicationContext(), "No info to share.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        String summary = cid.getText(curItem == 1);
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.setType("text/plain");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, summary);
+        startActivity(sendIntent);
     }
 
     @Override
@@ -64,9 +94,7 @@ public class MainTabActivity extends AppCompatActivity {
         // Handle item selection
         switch (id) {
             case R.id.share:
-                int curItem = mViewPager.getCurrentItem();
-                IShareable sp = (IShareable) (mSectionsPagerAdapter.instantiateItem(mViewPager, curItem));
-                sp.Share(findViewById(android.R.id.content));
+                share();
                 return true;
             case R.id.info:
                 // Start info activity
@@ -80,20 +108,20 @@ public class MainTabActivity extends AppCompatActivity {
     }
 
     /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+     * A {@link FragmentStateAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    static class SectionsPagerAdapter extends FragmentPagerAdapter {
+    class SectionsPagerAdapter extends FragmentStateAdapter {
 
-        SectionsPagerAdapter(FragmentManager fm) {
-            super(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        SectionsPagerAdapter(FragmentManager fragment, Lifecycle lifecycle) {
+            super(fragment, lifecycle);
         }
 
         @NonNull
         @Override
-        public Fragment getItem(int position) {
+        public Fragment createFragment(int position) {
             if (position == 0) {
-                return new CidFragment();
+                return new CidFragment(cid);
             }
             if (position == 1) {
                 return new AllFragment();
@@ -103,20 +131,9 @@ public class MainTabActivity extends AppCompatActivity {
         }
 
         @Override
-        public int getCount() {
+        public int getItemCount() {
             // Show 2 total pages.
             return 2;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "CID";
-                case 1:
-                    return "All";
-            }
-            return null;
         }
     }
 }

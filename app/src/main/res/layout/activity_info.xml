@@ -30,7 +30,7 @@
             android:layout_below="@+id/textView"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:text="CID stands for “Carrier ID”, and simply tells for what region/network/carrier your phone was intended for."
+            android:text="CID stands for “Carrier ID”, and simply tells what region/network/carrier your phone was intended for."
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView

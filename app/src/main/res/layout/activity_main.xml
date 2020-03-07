@@ -1,22 +1,26 @@
-<androidx.viewpager.widget.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.andy.simplecidgetter.MainTabActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
+        app:tabBackground="@color/customPrimaryColor"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@android:color/white"
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed"
+        tools:targetApi="lollipop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        android:elevation="4dp"
-        app:tabBackground="@color/customPrimaryColor"
-        app:tabIndicatorColor="@android:color/white"
-        app:tabMode="fixed"
-        app:tabMaxWidth="0dp"
-        app:tabGravity="fill"
-        tools:targetApi="lollipop" />
+        android:elevation="4dp" />
 
-</androidx.viewpager.widget.ViewPager>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
