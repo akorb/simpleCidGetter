@@ -1,6 +1,7 @@
 package com.andy.simplecidgetter;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -82,12 +83,13 @@ public class MainTabActivity extends AppCompatActivity {
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    class SectionsPagerAdapter extends FragmentPagerAdapter {
+    static class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         SectionsPagerAdapter(FragmentManager fm) {
             super(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
+        @NonNull
         @Override
         public Fragment getItem(int position) {
             if (position == 0) {
@@ -97,7 +99,7 @@ public class MainTabActivity extends AppCompatActivity {
                 return new AllFragment();
             }
 
-            return null;
+            throw new IllegalArgumentException("Given value for \"position\" is not valid.)");
         }
 
         @Override
