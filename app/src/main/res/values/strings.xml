@@ -1,0 +1,10 @@
+<resources>
+    <string name="no_htc">No HTC device</string>
+    <string name="unknown">Unknown</string>
+    <string name="share">Share</string>
+    <string name="info">Info</string>
+    <string name="help_paragraph1_header">What is the CID?</string>
+    <string name="help_paragraph1_content">CID stands for “Carrier ID”, and simply tells what region/network/carrier your phone was intended for.</string>
+    <string name="help_paragraph2_header">More details</string>
+    <string name="help_paragraph2_content">It\'s a string of letters and numbers, eight characters long that identifies what carrier your phone is from. When you flash an OTA or RUU, it checks for a few things, one of those things is the CID, to ensure you are flashing software intended for your device. Realistically, there\'s no hardware difference between HTC devices (with the exception of CDMA vs GSM) so all firmwares/softwares should be compatible. There have been occasions where flashing an RUU or OTA with the wrong CID or SuperCID while S-On would brick your phone. So try to be mindful of this and be careful.</string>
+</resources>

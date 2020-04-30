@@ -17,7 +17,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:padding="20dp"
-            android:text="What is the CID?"
+            android:text="@string/help_paragraph1_header"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textStyle="bold" />
 
@@ -30,7 +30,7 @@
             android:layout_below="@+id/textView"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:text="CID stands for “Carrier ID”, and simply tells what region/network/carrier your phone was intended for."
+            android:text="@string/help_paragraph1_content"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
@@ -41,7 +41,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView2"
             android:padding="20dp"
-            android:text="More details please"
+            android:text="@string/help_paragraph2_header"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textStyle="bold" />
 
@@ -54,7 +54,7 @@
             android:layout_below="@+id/textView3"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:text="It&apos;s a string of letters and numbers, eight characters long that identifies what carrier your phone is from. When you flash an OTA or RUU, it checks for a few things, one of those things is the CID, to ensure you are flashing software intended for your device. Realistically, there&apos;s no hardware difference between HTC devices (with the exception of CDMA vs GSM) so all firmwares/softwares should be compatible. There have been occasions where flashing an RUU or OTA with the wrong CID or SuperCID while S-On would brick your phone. So try to be mindful of this and be careful."
+            android:text="@string/help_paragraph2_content"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
 </ScrollView>

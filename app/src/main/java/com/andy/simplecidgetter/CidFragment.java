@@ -39,13 +39,13 @@ public class CidFragment extends Fragment {
 
     private void assignStatusNoHtc() {
         tvCid.setVisibility(View.GONE);
-        tvCidName.setText("No HTC device");
+        tvCidName.setText(R.string.no_htc);
     }
 
     private void assignStatusUnofficialCid() {
         tvCid.setText(cidState.getCid());
         tvCidName.setTextSize(20f);
-        tvCidName.setText("Unknown");
+        tvCidName.setText(R.string.unknown);
     }
 
     private void setStatus(Cid.State state) {
