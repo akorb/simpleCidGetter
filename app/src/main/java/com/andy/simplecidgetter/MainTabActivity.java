@@ -98,8 +98,7 @@ public class MainTabActivity extends AppCompatActivity {
                 return true;
             case R.id.info:
                 // Start info activity
-                InfoActivity act = new InfoActivity();
-                Intent intent = new Intent(this, act.getClass());
+                Intent intent = new Intent(this, InfoActivity.class);
                 startActivity(intent);
                 return true;
             default:
