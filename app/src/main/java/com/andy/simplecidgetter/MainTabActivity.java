@@ -25,16 +25,12 @@ public class MainTabActivity extends AppCompatActivity {
      */
     private ViewPager2 mViewPager;
 
-    private Cid cid;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().setElevation(0); // disable shadow for appbar
-
-        cid = new Cid();
 
         // Create the adapter that will return a fragment for each of the two
         // primary sections of the activity.
@@ -72,12 +68,12 @@ public class MainTabActivity extends AppCompatActivity {
     private void share() {
         int curItem = mViewPager.getCurrentItem();
 
-        if (cid.getState() == Cid.State.NoHtc && curItem == 0) {
+        if (Cid.getState() == Cid.State.NoHtc && curItem == 0) {
             Toast.makeText(this.getApplicationContext(), "No info to share.", Toast.LENGTH_LONG).show();
             return;
         }
 
-        String summary = cid.getText(curItem == 1);
+        String summary = Cid.getText(curItem == 1);
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
         sendIntent.setType("text/plain");
         sendIntent.putExtra(Intent.EXTRA_TEXT, summary);
@@ -110,7 +106,7 @@ public class MainTabActivity extends AppCompatActivity {
      * A {@link FragmentStateAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    class SectionsPagerAdapter extends FragmentStateAdapter {
+    static class SectionsPagerAdapter extends FragmentStateAdapter {
 
         SectionsPagerAdapter(FragmentManager fragment, Lifecycle lifecycle) {
             super(fragment, lifecycle);
@@ -120,7 +116,7 @@ public class MainTabActivity extends AppCompatActivity {
         @Override
         public Fragment createFragment(int position) {
             if (position == 0) {
-                return new CidFragment(cid);
+                return new CidFragment();
             }
             if (position == 1) {
                 return new AllFragment();

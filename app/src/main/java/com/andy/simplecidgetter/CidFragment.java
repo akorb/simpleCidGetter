@@ -12,19 +12,13 @@ public class CidFragment extends Fragment {
     private TextView tvCid;
     private TextView tvCidName;
 
-    private final Cid cidState;
-
-    CidFragment(Cid cidState) {
-        this.cidState = cidState;
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cid, container, false);
         tvCid = view.findViewById(R.id.tvCid);
         tvCidName = view.findViewById(R.id.tvCidName);
 
-        setStatus(cidState.getState());
+        setStatus(Cid.getState());
 
         return view;
     }
@@ -33,8 +27,8 @@ public class CidFragment extends Fragment {
 
     private void assignStatusOfficialCid() {
         tvCid.setVisibility(View.VISIBLE);
-        tvCid.setText(cidState.getCid());
-        tvCidName.setText(cidState.getCidName());
+        tvCid.setText(Cid.getCid());
+        tvCidName.setText(Cid.getCidName());
     }
 
     private void assignStatusNoHtc() {
@@ -43,7 +37,7 @@ public class CidFragment extends Fragment {
     }
 
     private void assignStatusUnofficialCid() {
-        tvCid.setText(cidState.getCid());
+        tvCid.setText(Cid.getCid());
         tvCidName.setTextSize(20f);
         tvCidName.setText(R.string.unknown);
     }

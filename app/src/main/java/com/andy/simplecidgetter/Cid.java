@@ -7,12 +7,16 @@ import java.util.Map;
 import static com.andy.simplecidgetter.PropertyHelper.getPropertyValue;
 
 class Cid {
-    private final String cid;
-    private String cidName;
+    private Cid() {
+        // hide constructor
+    }
 
-    private final State state;
+    private static final String cid;
+    private static String cidName;
 
-    private Map<String, String> createCidHashMap() {
+    private static final State state;
+
+    private static Map<String, String> createCidHashMap() {
         /*
         More than the actual expected items (CIDs)
         because we want enough space that no collisions happen.
@@ -149,19 +153,19 @@ class Cid {
         return dic;
     }
 
-    String getCid() {
+    static String getCid() {
         return cid;
     }
 
-    String getCidName() {
+    static String getCidName() {
         return cidName;
     }
 
-    State getState() {
+    static State getState() {
         return state;
     }
 
-    String getText(boolean all) {
+    static String getText(boolean all) {
         if (all) {
             return PropertyHelper.getAll();
         }
@@ -172,7 +176,7 @@ class Cid {
         return text;
     }
 
-    Cid() {
+    static {
         cid = getCidFromSystem();
         // DEBUG
         //cid = "11111111";
