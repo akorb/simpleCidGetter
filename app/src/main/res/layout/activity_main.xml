@@ -7,15 +7,13 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
-        app:tabBackground="@color/customPrimaryColor"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@android:color/white"
+        app:tabIndicatorColor="?android:colorForeground"
         app:tabMaxWidth="0dp"
         app:tabMode="fixed"
         tools:targetApi="lollipop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
         android:elevation="4dp" />
 
     <androidx.viewpager2.widget.ViewPager2
