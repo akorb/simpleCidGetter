@@ -9,10 +9,8 @@ final class PropertyHelper {
     }
 
     static String getAll() {
-        try {
-            Scanner reader = new Scanner(Runtime.getRuntime().exec("getprop")
-                    .getInputStream());
-
+        try (Scanner reader = new Scanner(Runtime.getRuntime().exec("getprop")
+                .getInputStream())) {
             StringBuilder sb = new StringBuilder();
             String separator = System.getProperty("line.separator");
 
@@ -23,8 +21,6 @@ final class PropertyHelper {
                 sb.append(separator);
             }
 
-            reader.close();
-
             return sb.toString();
         } catch (IOException ex) {
             return "";
@@ -32,22 +28,16 @@ final class PropertyHelper {
     }
 
     static String getPropertyValue(String propertyName) {
-        try {
-            Scanner reader = new Scanner(Runtime.getRuntime()
-                    .exec("getprop " + propertyName).getInputStream());
-
-            String result;
+        String result = "";
+        try (Scanner reader = new Scanner(Runtime.getRuntime()
+                .exec("getprop " + propertyName).getInputStream())) {
 
             if (reader.hasNext()) {
                 result = reader.nextLine();
-            } else {
-                result = "";
             }
-
-            reader.close();
             return result;
-        } catch (IOException ex) {
-            return "";
+        } catch (IOException ignored) {
         }
+        return result;
     }
 }
