@@ -10,7 +10,7 @@ android {
         applicationId 'com.andy.simplecidgetter'
         minSdk 16
         targetSdk 30
-        versionCode 29
+        versionCode 30
         versionName "1.7"
 
         vectorDrawables.useSupportLibrary = true
