@@ -88,18 +88,17 @@ public class MainTabActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         // Handle item selection
-        switch (id) {
-            case R.id.share:
-                share();
-                return true;
-            case R.id.info:
-                // Start info activity
-                Intent intent = new Intent(this, InfoActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (id == R.id.share) {
+            share();
+            return true;
         }
+
+        if (id == R.id.info) {// Start info activity
+            Intent intent = new Intent(this, InfoActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
