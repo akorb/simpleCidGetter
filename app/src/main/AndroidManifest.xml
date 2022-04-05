@@ -3,13 +3,11 @@
     package="com.andy.simplecidgetter">
 
     <application
-        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="Simple CID Getter"
         android:theme="@style/GreenTheme">
         <activity
             android:name=".MainTabActivity"
-            android:label="Simple CID Getter"
             android:launchMode="singleTop"
             android:exported="true">
             <intent-filter>
