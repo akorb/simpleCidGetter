@@ -93,7 +93,8 @@ public class MainTabActivity extends AppCompatActivity {
             return true;
         }
 
-        if (id == R.id.info) {// Start info activity
+        if (id == R.id.info) {
+            // Start info activity
             Intent intent = new Intent(this, InfoActivity.class);
             startActivity(intent);
             return true;
@@ -114,14 +115,14 @@ public class MainTabActivity extends AppCompatActivity {
         @NonNull
         @Override
         public Fragment createFragment(int position) {
-            if (position == 0) {
-                return new CidFragment();
+            switch (position) {
+                case 0:
+                    return new CidFragment();
+                case 1:
+                    return new AllFragment();
+                default:
+                    throw new IllegalArgumentException("Given value for \"position\" is not valid.)");
             }
-            if (position == 1) {
-                return new AllFragment();
-            }
-
-            throw new IllegalArgumentException("Given value for \"position\" is not valid.)");
         }
 
         @Override

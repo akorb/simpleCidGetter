@@ -17,14 +17,7 @@ class Cid {
     private static final State state;
 
     private static Map<String, String> createCidHashMap() {
-        /*
-        More than the actual expected items (CIDs)
-        because we want enough space that no collisions happen.
-
-        256 because Java uses only power of two values.
-        Giving 200 or something similar would give the same initial capacity.
-        */
-        Map<String, String> dic = new HashMap<>(256);
+        Map<String, String> dic = new HashMap<>(125);
         dic.put("11111111", "SuperCID");
         dic.put("HTC__622", "Asia-HK-CHT");
         dic.put("CWS__001", "ATT");
@@ -196,12 +189,12 @@ class Cid {
     }
 
     private static String getCidFromSystem() {
-        // The cid is stored usually stored in ro.cid
+        // The cid is usually stored in ro.cid
         String primaryCid = getPropertyValue("ro.cid");
         if (!primaryCid.isEmpty())
             return primaryCid.toUpperCase(Locale.getDefault());
-        // ro.cid does not exist for each device.
-        // I guess it's for GPE devices, but this isn't for sure yet.
+        // Sometimes it is stored in ro.boot.cid.
+        // I guess that's the case for GPE devices.
         String fallbackCid = getPropertyValue("ro.boot.cid");
         if (!fallbackCid.isEmpty())
             return fallbackCid.toUpperCase(Locale.getDefault());
