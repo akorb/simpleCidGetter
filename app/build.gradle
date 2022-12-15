@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId 'com.andy.simplecidgetter'
         minSdk 16
-        targetSdk 32
+        targetSdk 33
         versionCode 32
         versionName "1.7"
 
