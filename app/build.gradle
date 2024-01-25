@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId 'com.andy.simplecidgetter'
-        minSdk 16
-        targetSdk 33
+        minSdk 19
+        targetSdk 34
         versionCode 34
         versionName "1.9"
 
@@ -35,7 +35,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 }
