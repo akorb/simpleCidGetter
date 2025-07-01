@@ -12,7 +12,7 @@ final class PropertyHelper {
         try (Scanner reader = new Scanner(Runtime.getRuntime().exec("getprop")
                 .getInputStream())) {
             StringBuilder sb = new StringBuilder();
-            String separator = System.getProperty("line.separator");
+            String separator = System.lineSeparator();
 
             while (reader.hasNext()) {
                 String s1 = reader.nextLine();

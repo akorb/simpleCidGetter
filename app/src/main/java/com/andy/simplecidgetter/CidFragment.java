@@ -23,8 +23,6 @@ public class CidFragment extends Fragment {
         return view;
     }
 
-
-
     private void assignStatusOfficialCid() {
         tvCid.setVisibility(View.VISIBLE);
         tvCid.setText(Cid.getCid());

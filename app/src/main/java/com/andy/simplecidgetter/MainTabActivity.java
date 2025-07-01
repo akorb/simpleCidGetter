@@ -47,14 +47,11 @@ public class MainTabActivity extends AppCompatActivity {
     }
 
     private static String getPageTitle(int position) {
-        switch (position) {
-            case 0:
-                return "CID";
-            case 1:
-                return "All";
-        }
-
-        throw new IllegalArgumentException();
+        return switch (position) {
+            case 0 -> "CID";
+            case 1 -> "All";
+            default -> throw new IllegalArgumentException();
+        };
     }
 
 
@@ -115,14 +112,11 @@ public class MainTabActivity extends AppCompatActivity {
         @NonNull
         @Override
         public Fragment createFragment(int position) {
-            switch (position) {
-                case 0:
-                    return new CidFragment();
-                case 1:
-                    return new AllFragment();
-                default:
-                    throw new IllegalArgumentException("Given value for \"position\" is not valid.)");
-            }
+            return switch (position) {
+                case 0 -> new CidFragment();
+                case 1 -> new AllFragment();
+                default -> throw new IllegalArgumentException("Given value for \"position\" is not valid.)");
+            };
         }
 
         @Override
