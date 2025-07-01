@@ -3,30 +3,30 @@ plugins {
 }
 
 android {
-    compileSdk 36
+    compileSdk = 36
 
     defaultConfig {
-        applicationId 'com.andy.simplecidgetter'
-        minSdk 21
-        targetSdk 36
-        versionCode 35
-        versionName "1.9.1"
+        applicationId = 'com.andy.simplecidgetter'
+        minSdk = 21
+        targetSdk = 36
+        versionCode = 35
+        versionName = "1.9.1"
 
         vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            shrinkResources true
+            shrinkResources = true
         }
     }
 
     buildFeatures {
-        viewBinding true
+        viewBinding = true
     }
-    namespace 'com.andy.simplecidgetter'
+    namespace = 'com.andy.simplecidgetter'
 }
 
 dependencies {
