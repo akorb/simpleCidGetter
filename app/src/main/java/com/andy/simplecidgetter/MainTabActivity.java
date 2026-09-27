@@ -36,7 +36,7 @@ public class MainTabActivity extends AppCompatActivity {
         // primary sections of the activity.
         SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(this.getSupportFragmentManager(), this.getLifecycle());
 
-        // Set up the ViewPager with the sections adapter.
+        // Set up the ViewPager with the section's adapter.
         mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
